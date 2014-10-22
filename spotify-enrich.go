@@ -65,11 +65,11 @@ func main() {
 
 		if len(r.Tracks.Items) > 0 {
 			fmt.Println(r.Tracks.Items[0])
-			_, err := db.Query("MATCH (t:Track {name:{0}, artist:{1}}) SET t.duration = {2}, t.trackId = {3}", name, artist, r.Tracks.Items[0].Duration, r.Tracks.Items[0].Id)
+			// update the db
+			_, err := db.Exec("MATCH (t:Track {name:{0}, artist:{1}}) SET t.duration = {2}, t.trackId = {3}", name, artist, r.Tracks.Items[0].Duration, r.Tracks.Items[0].Id)
 			if err != nil {
 				log.Fatal(err)
 			}
-
 		}
 	}
 }
